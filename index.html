@@ -1,6 +1,7 @@
 <html lang="en">
 <head>
-  <title>MAPTIME NEIGHBORS</title>
+  <title>Nearest Maptime</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
   <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
   <script src='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.js'></script>
@@ -40,20 +41,24 @@
   #map.before {
     opacity: .3;
   }
-  .outer {
-    display: table;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-  }
-  .inner {
-    display: table-cell;
-    vertical-align: middle;
+  @media (min-width: 500px) {
+    .outer {
+      display: table;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+    .inner {
+      display: table-cell;
+      vertical-align: middle;
+    }
   }
   
   #neighbor {
+    display: block;
+    padding: 1em;
     margin: 1em auto;
-    width: 500px;
+    max-width: 500px;
   }
   input {
     float:left;
@@ -124,14 +129,15 @@
   <script>
   var map = null;
   var searchValue;
+  var token = 'pk.eyJ1IjoiY3Vnb3MiLCJhIjoidGNnSlBNTSJ9.qPHDxAemDindkSskKNv90g';
   function init() {
-    map = L.mapbox.accessToken = 'pk.eyJ1IjoiY3Vnb3MiLCJhIjoidGNnSlBNTSJ9.qPHDxAemDindkSskKNv90g';
+    map = L.mapbox.accessToken = token;
     L.mapbox.map('map', 'cugos.jphcb71d');
   }
 
   function search(value) {
     $.ajax({
-      url: 'http://api.tiles.mapbox.com/v4/geocode/mapbox.places/'+value+'.json?access_token=pk.eyJ1IjoiY3Vnb3MiLCJhIjoidGNnSlBNTSJ9.qPHDxAemDindkSskKNv90g',
+      url: 'http://api.tiles.mapbox.com/v4/geocode/mapbox.places/'+value+'.json?access_token=' + token,
       dataType: 'json',
       async: true,
       success: findNearest,
