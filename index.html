@@ -8,7 +8,7 @@
   <link href='https://api.tiles.mapbox.com/mapbox.js/v2.2.1/mapbox.css' rel='stylesheet' />
   <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/turf/v2.0.0/turf.min.js'></script>
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-  <script src='chapters.js'></script>
+  <link rel='shortcut icon' href='http://maptime.io/img/favicon.png' type='image/x-icon' />
   <style>
   body {
     padding:0;
@@ -127,13 +127,13 @@
   </div>
 
   <script>
-  var map = null;
-  var searchValue;
-  var token = 'pk.eyJ1IjoiY3Vnb3MiLCJhIjoidGNnSlBNTSJ9.qPHDxAemDindkSskKNv90g';
-  function init() {
-    map = L.mapbox.accessToken = token;
-    L.mapbox.map('map', 'cugos.jphcb71d');
-  }
+  var searchValue, chapters,
+      token = 'pk.eyJ1IjoiY3Vnb3MiLCJhIjoidGNnSlBNTSJ9.qPHDxAemDindkSskKNv90g';
+
+  // function map() {
+  //   map = L.mapbox.accessToken = token;
+  //   L.mapbox.map('map', 'cugos.jphcb71d');
+  // }
 
   function search(value) {
     $.ajax({
@@ -204,13 +204,30 @@
     }
   }
 
-  $('#search').on('click', function(e){
-    e.preventDefault();
-    searchValue = $('#location').val();
-    search(searchValue);
-  });
+  function getChapters() {
+    $.ajax({
+      url: 'https://raw.githubusercontent.com/maptime/maptime.github.io/master/_data/chapters.json',
+      dataType: 'json',
+      async: true,
+      success: function(response) {
+        console.log(response);
+        chapters = response;
+      }
+    });
+  }
 
-  // window.onload = init();
+  function addEventListeners() {
+    $('#search').on('click', function(e){
+      e.preventDefault();
+      searchValue = $('#location').val();
+      search(searchValue);
+    });
+  }
+
+  $(document).ready(function(){
+    getChapters();
+    addEventListeners();
+  });
   </script>
 </body>
 </html>
