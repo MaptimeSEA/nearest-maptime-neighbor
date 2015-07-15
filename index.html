@@ -204,6 +204,17 @@
     search(searchValue);
   });
 
+  function getChapters() {
+    $.ajax({
+      url: 'https://raw.githubusercontent.com/maptime/maptime.github.io/master/_data/chapters.json',
+      dataType: 'json',
+      async: true,
+      success: function(response) {
+        chapters = response;
+      }
+    });
+  }
+
   // window.onload = init();
   </script>
 </body>
