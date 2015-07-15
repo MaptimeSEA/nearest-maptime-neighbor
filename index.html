@@ -121,15 +121,12 @@
   </div>
 
   <script>
-  var map = null;
-  var searchValue;
+  var searchValue, chapters;
 
-  getChapters();
-
-  function init() {
-    map = L.mapbox.accessToken = 'pk.eyJ1IjoiY3Vnb3MiLCJhIjoidGNnSlBNTSJ9.qPHDxAemDindkSskKNv90g';
-    L.mapbox.map('map', 'cugos.jphcb71d');
-  }
+  // function init() {
+  //   map = L.mapbox.accessToken = 'pk.eyJ1IjoiY3Vnb3MiLCJhIjoidGNnSlBNTSJ9.qPHDxAemDindkSskKNv90g';
+  //   L.mapbox.map('map', 'cugos.jphcb71d');
+  // }
 
   function search(value) {
     $.ajax({
@@ -200,24 +197,30 @@
     }
   }
 
-  $('#search').on('click', function(e){
-    e.preventDefault();
-    searchValue = $('#location').val();
-    search(searchValue);
-  });
-
   function getChapters() {
     $.ajax({
       url: 'https://raw.githubusercontent.com/maptime/maptime.github.io/master/_data/chapters.json',
       dataType: 'json',
       async: true,
       success: function(response) {
+        console.log(response);
         chapters = response;
       }
     });
   }
 
-  // window.onload = init();
+  $(document).ready(function(){
+    getChapters();
+    addEventListeners();
+  });
+
+  function addEventListeners() {
+    $('#search').on('click', function(e){
+      e.preventDefault();
+      searchValue = $('#location').val();
+      search(searchValue);
+    });
+  }
   </script>
 </body>
 </html>
