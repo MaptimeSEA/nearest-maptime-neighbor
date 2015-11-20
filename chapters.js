@@ -606,19 +606,19 @@ var chapters = {
         "twitter": "MAPTIMELA",
         "organizers": [
           {
-            "name": "Jonathan Schaeffer",
-            "twitter": "moderndisease"
+            "name": "Omar Ureta",
+            "twitter": "theworksla"
           },
           {
-            "name": "Chandler Sterlin",
+            "name": "Chandler Sterling",
             "twitter": "chandlersterlin"
           },
           {
             "name": "Jacqui Swartz"
           },
           {
-            "name": "John Wiseman",
-            "twitter": "lemonodor"
+            "name": "Bond Harper",
+            "twitter": "bondaharper"
           },
           {
             "name": "Machiko Yasuda",
